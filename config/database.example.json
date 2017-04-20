@@ -1,0 +1,32 @@
+{
+    "development": {
+        "main": {
+            "adapter": "",
+            "host": "",
+            "port": "",
+            "user": "",
+            "password": "",
+            "database": ""
+        }
+    },
+    "test": {
+        "main": {
+            "adapter": "",
+            "host": "",
+            "port": "",
+            "user": "",
+            "password": "",
+            "database": ""
+        }
+    },
+    "production": {
+        "main": {
+            "adapter": "",
+            "host": "",
+            "port": "",
+            "user": "",
+            "password": "",
+            "database": ""
+        }
+    }
+}
