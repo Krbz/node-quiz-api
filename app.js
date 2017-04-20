@@ -1,13 +1,12 @@
 /**
  *  Include dependencies
- *  babel-register - compile es6/es7 code
  *  express - require express and initialize express function (createApplication)
  *  config - require config with secrets
  *  Database - require Database module
  *  Scrapper - require Scrapper module
  */
-require("babel-register");
 const path = require('path');
+const process = require('process');
 const express = require('express');
 const config = require('./config/secrets.json');
 const Database = require('./libs/database');
@@ -30,7 +29,6 @@ const app = express();
  */
 const env = process.env.NODE_ENV || 'production';
 const port = process.env.PORT || config[env].port;
-const baseURL = config[env].url;
 
 /**
  * Start application
@@ -48,8 +46,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.disable('etag');
 
 app.use(function(err, req, res, next) {
-    if (err.status !== 404) return next();
-    res.send(err.message);
+  if (err.status !== 404) return next();
+  res.send(err.message);
 });
 
 /**
@@ -66,5 +64,5 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
  *  Initialize server with port from env or config file
  */
 app.listen(port, () => {
-    Logger({message: `Server is listening at: ${port}`});
+  Logger({message: `Server is listening at: ${port}`});
 });

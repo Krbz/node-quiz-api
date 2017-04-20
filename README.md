@@ -1,4 +1,5 @@
 # Node Quiz API
+Server-side of [React Quiz](https://github.com/Krbz/react-quiz).
 Node RESTFUL API using [Express](https://github.com/expressjs/express).
 
 ## Quick start
@@ -15,7 +16,7 @@ $ cp config/database.example.json config/database.json
 $ cp config/secrets.example.json config/secrets.json
 ```
 
-### 2. Install dependecies
+### 2. Install dependencies
 ```sh
 $ npm install 
 ```
@@ -28,8 +29,6 @@ $ yarn
 ```sh
 $ npm start
 ```
-
-### 4. Check Client Site [React Api](https://github.com/Krbz/react-quiz)
 
 ## Dependecies
 
