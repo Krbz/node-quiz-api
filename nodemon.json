@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "exec": "node app.js",
+  "exec": "node --harmony app.js",
   "ignore": [
     ".git",
     ".idea",
