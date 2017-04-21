@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('./mongoose');
 const Logger = require('./logger.js');
 const database = require('../config/database.json');
 
@@ -6,16 +6,8 @@ const env = process.env.NODE_ENV || 'production';
 const db = database[env].main;
 const url = `${db.adapter}://${db.user}:${db.password}@${db.host}:${db.port}/${db.database}`;
 
-function connect() {
-  const options = {server: {socketOptions: {keepAlive: 1}}};
-
-  Logger({message: 'Connecting to database [...]'});
-
-  return mongoose.connect(url, options)
-    .connection
-    .on('error', error)
-    .on('disconnected', disconnected)
-    .on('connected', connected);
+function exit() {
+  process.exit(0);
 }
 
 function error(err) {
@@ -29,7 +21,7 @@ function connected() {
   /**
    * If the Node process ends, close the Mongoose connection
    */
-  process.on('SIGINT', function () {
+  process.on('SIGINT', () => {
     Logger({message: 'SIGINT'});
 
     mongoose.connection.close(() => {
@@ -46,8 +38,16 @@ function disconnected() {
   exit();
 }
 
-function exit() {
-  process.exit(0);
+function connect() {
+  const options = {server: {socketOptions: {keepAlive: 1}}};
+
+  Logger({message: 'Connecting to database [...]'});
+
+  return mongoose.connect(url, options)
+    .connection
+    .on('error', error)
+    .on('disconnected', disconnected)
+    .on('connected', connected);
 }
 
 module.exports = connect;

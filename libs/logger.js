@@ -3,21 +3,23 @@ const fs = require('fs');
 
 const env = process.env.NODE_ENV || 'production';
 const debug = secrets[env].debug;
-const console_debug = debug.console;
-const file_debug = debug.file;
-const file_name = debug.filename;
+
+const consoleDebug = debug.console;
+const fileDebug = debug.file;
+const fileName = debug.filename;
 
 function Logger({message}) {
-  if (file_debug) {
-    const logger = fs.createWriteStream(__dirname + `/../public/${file_name}`, {
-      flags: 'a'
+  if (fileDebug) {
+    const logger = fs.createWriteStream(__dirname + `/../public/${fileName}`, {
+      flags: 'a',
     });
 
     logger.write(`[${new Date()}]: Env: ${env}, Message: ${message}\n`);
   }
 
-  if (console_debug) {
-    console.log(`[${new Date()}]: Env: ${env}, Message: ${message}`)
+
+  if (consoleDebug) {
+    console.log(`[${new Date()}]: Env: ${env}, Message: ${message}`);
   }
 }
 

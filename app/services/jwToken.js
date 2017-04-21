@@ -7,8 +7,8 @@ const expiresIn = '120m';
 
 const Token = {
   CreateToken: (user, next) => {
-    jwt.sign({ _id: user.id }, tokenSecret, { expiresIn }, (err, token) => {
-      next(err, { token });
+    jwt.sign({ _id: user._id }, tokenSecret, { expiresIn }, (err, token) => {
+      next(err, token);
     });
   },
 

@@ -10,5 +10,12 @@
   "env": {
     "es6": true,
     "node": true
+  },
+  "rules": {
+    "skipBlankLines": 0,
+    "no-trailing-spaces": 0,
+    "object-curly-spacing": 0,
+    "no-shadow": "warn",
+    "no-underscore-dangle": 0
   }
 }
