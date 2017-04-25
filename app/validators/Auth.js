@@ -1,11 +1,9 @@
 const Joi = require('joi');
 
-const Auth = {
+module.exports = {
   verifyAuth: {
     body: {
       token: Joi.string().required(),
     },
   },
 };
-
-module.exports = Auth;

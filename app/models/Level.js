@@ -1,16 +1,17 @@
 const mongoose = require('../../libs/mongoose');
 
 const Schema = {
-  username: {
+  quiz: {
     type: String,
-    unique: true,
   },
-  email: {
-    type: String,
-    unique: true,
+  unlocked: {
+    type: Boolean,
   },
-  password: {
+  author: {
     type: String,
+  },
+  coverage: {
+    type: Number,
   },
   created_at: {
     type: Date,
@@ -18,4 +19,4 @@ const Schema = {
   },
 };
 
-module.exports = mongoose.model('users', Schema);
+module.exports = mongoose.model('level', Schema);

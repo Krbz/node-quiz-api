@@ -1,6 +1,6 @@
 const mongoose = require('../../libs/mongoose');
 
-const quizSchema = {
+const Schema = {
   title: {
     type: String,
     unique: true,
@@ -10,7 +10,6 @@ const quizSchema = {
   },
   author: {
     type: String,
-    require: true,
   },
   type: {
     type: String,
@@ -21,4 +20,4 @@ const quizSchema = {
   },
 };
 
-module.exports = mongoose.model('quiz', quizSchema);
+module.exports = mongoose.model('quiz', Schema);

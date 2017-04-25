@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const Quiz = {
+module.exports = {
   Add: {
     body: {
       title: Joi.string().required(),
@@ -10,5 +10,3 @@ const Quiz = {
     },
   },
 };
-
-module.exports = Quiz;

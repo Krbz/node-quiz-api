@@ -12,7 +12,7 @@ const Quiz = {
 
     QuizModel.findOne({title: req.body.title}).exec()
       .then((quiz) => {
-        if (quiz && quiz.length) return res.status(200).json({error: true, Response: 'Quiz with that title already exists'});
+        if (quiz && quiz.length) return res.status(200).json({error: true, Response: 'Quiz already exists, provide unique title'});
 
         return QuizModel.create(prepare, (err) => {
           if (err) return res.status(500).json({error: err.errors, Response: {message: err.message}});
@@ -30,9 +30,6 @@ const Quiz = {
         return res.status(200).json({error: false, Response: list});
       })
       .catch(err => res.status(500).json({error: err.errors, Response: {message: err.message}}));
-  },
-  GetLevels: (req, res) => {
-
   },
   GetQuestions: (req, res) => {
 

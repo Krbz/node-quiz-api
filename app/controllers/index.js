@@ -4,6 +4,7 @@ const Leaderboard = require('./Leaderboard');
 const User = require('./User');
 const Quiz = require('./Quiz');
 const Questions = require('./Questions');
+const Levels = require('./Levels');
 
 module.exports = {
   Answers,
@@ -12,4 +13,5 @@ module.exports = {
   User,
   Quiz,
   Questions,
+  Levels,
 };
