@@ -25,7 +25,7 @@ Router.route('/quiz/add').post(validate(Validators.Quiz.Add), Controllers.Quiz.A
 Router.route('/quiz/levels').post(validate(Validators.Level.Get), Controllers.Levels.Get);
 Router.route('/quiz/levels/add').post(validate(Validators.Level.Add), Controllers.Levels.Add);
 
-Router.route('/quiz/questions').post(Controllers.Quiz.GetQuestions);
-// Router.route('/quiz/questions/add').post(Controllers.Quiz.GetQuestions);
+Router.route('/quiz/questions').post(validate(Validators.Question.Get), Controllers.Questions.Get);
+Router.route('/quiz/questions/add').post(validate(Validators.Question.Add), Controllers.Questions.Add);
 
 module.exports = Router;

@@ -20,4 +20,4 @@ const Schema = {
   },
 };
 
-module.exports = mongoose.model('quiz', Schema);
+module.exports = mongoose.model('quizzes', Schema);

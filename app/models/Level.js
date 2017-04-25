@@ -19,4 +19,4 @@ const Schema = {
   },
 };
 
-module.exports = mongoose.model('level', Schema);
+module.exports = mongoose.model('levels', Schema);
