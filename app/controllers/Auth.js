@@ -50,8 +50,8 @@ const Auth = {
   Register: (req, res) => {
     this.saltedPassword = null;
 
-    CryptService.BeforeCreate(req.body.password, (resp) => {
-      if (resp.error) return res.json({error: resp.error, Response: {message: resp.error.message}});
+    CryptService.BeforeCreate(req.body.password, (error, resp) => {
+      if (error) return res.json({error: error.errors, Response: {message: error.message}});
 
       this.saltedPassword = resp.hash;
 

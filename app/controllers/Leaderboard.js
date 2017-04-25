@@ -1,9 +1,5 @@
 const Leaderboard = {
-  GetList: (res, req) => {},
+  Get: (res, req) => {},
 };
 
 module.exports = Leaderboard;
-
-/*
-* GET getLeaderBoardList
-*/
