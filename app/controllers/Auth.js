@@ -16,10 +16,11 @@ const Auth = {
     });
   },
   Login: (req, res) => {
+    console.log('req.body', req.body);
     UserModel.findOne({
       $or: [
-        {username: req.body.username},
-        {email: req.body.email},
+        {username: req.body.login},
+        {email: req.body.login},
       ],
     }).exec()
       .then((user) => {
@@ -35,7 +36,7 @@ const Auth = {
             if (err) return res.status(500).json({success: false, message: `Failed while creating authenticate token. ${err}`});
             if (!token) return res.status(500).json({success: false, message: 'Failed while creating authenticate token.'});
 
-            return res.json({
+            return res.status(200).json({
               error: false,
               Response: 'Your authentication is valid',
               token,
@@ -43,9 +44,7 @@ const Auth = {
           });
         });
       })
-      .catch((err) => {
-        return res.status(500).json({error: err.errors, Response: {message: err.message}});
-      });
+      .catch(err => res.status(500).json({error: err.errors, Response: {message: err.message}}));
   },
   Register: (req, res) => {
     this.saltedPassword = null;
@@ -53,7 +52,7 @@ const Auth = {
     CryptService.BeforeCreate(req.body.password, (error, resp) => {
       if (error) return res.json({error: error.errors, Response: {message: error.message}});
 
-      this.saltedPassword = resp.hash;
+      this.saltedPassword = resp;
 
       const User = new UserModel({
         username: req.body.username,
@@ -67,12 +66,12 @@ const Auth = {
       ]})
         .exec()
         .then((user) => {
-          if (user.length) return res.json({error: false, Response: 'User exists!'});
+          if (user.length) return res.status(200).json({error: true, Response: 'User exists!'});
 
           return UserModel.create(User, (err) => {
             if (err) return res.status(500).json({error: err, Response: {message: err}});
 
-            return res.json({error: false, Response: `User ${req.body.username} added`});
+            return res.status(200).json({error: false, Response: `User ${req.body.username} added`});
           });
         })
         .catch((err) => {

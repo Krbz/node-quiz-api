@@ -6,6 +6,8 @@ const Validators = require('../validators/index');
 
 const Router = app.Router();
 
+/* Public routes */
+
 /**
  * @swagger
  * /api/:
@@ -20,9 +22,74 @@ Router.route('/').get((req, res) => res.json({
   author: 'https://github.com/Krbz',
 }));
 
-/* Public routes */
-Router.route('/auth/register').post(Controllers.Auth.Register);
-Router.route('/auth/login').post(Controllers.Auth.Login);
+/**
+ * @swagger
+ * /api/auth/register:
+ *   post:
+ *     tags:
+ *       - auth
+ *     description: Creates a new User
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: request
+ *         description: User's Register request
+ *         in: body
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: User ${username} added
+ *         schema:
+ *           type: object
+ *           properties:
+ *             username:
+ *               type: string
+ *               required: true
+ *             email:
+ *               type: string
+ *               required: true
+ *             password:
+ *               type: string
+ *               required: true
+ *       500:
+ *         description: Failed to register user ${err}
+ */
+Router.route('/auth/register').post(validate(Validators.Auth.Register), Controllers.Auth.Register);
+
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     tags:
+ *       - auth
+ *     description: User Login
+ *     consumes:
+ *       - 'application/json; charset=utf-8'
+ *     parameters:
+ *       - name: request
+ *         description: User's login request
+ *         in: body
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Your authentication is valid
+ *         schema:
+ *           type: object
+ *           properties:
+ *             login:
+ *               type: string
+ *               required: true
+ *             password:
+ *               type: string
+ *               required: true
+ *       500:
+ *         description: Failed while creating authenticate token. ${err}
+ *       403:
+ *         description: Authentication failed. ${resp.message}
+ */
+Router.route('/auth/login').post(validate(Validators.Auth.Login), Controllers.Auth.Login);
 
 // Token verify
 Router.use(validate(Validators.Auth.verifyAuth), Controllers.Auth.Verify);
