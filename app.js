@@ -11,6 +11,8 @@ const express = require('express');
 const config = require('./config/secrets.json');
 const Database = require('./libs/database');
 const Logger = require('./libs/logger');
+const swaggerSpec = require('./libs/swagger');
+const swaggerUI = require('swagger-ui-express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const Routes = require('./app/routes');
@@ -35,7 +37,7 @@ const port = process.env.PORT || config[env].port;
  *
  * Connect to database
  */
-new Database();
+Database();
 
 /**
  *  Middleware config
@@ -45,9 +47,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.disable('etag');
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   if (err.status !== 404) return next();
-  res.send(err.message);
+
+  return res.send(err.message);
 });
 
 /**
@@ -59,6 +62,11 @@ app.use('/api', Routes);
  *  App static Routes
  */
 app.use('/static', express.static(path.join(__dirname, 'public')));
+
+/**
+ * App Swagger Documentation
+ * */
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 /**
  *  Initialize server with port from env or config file

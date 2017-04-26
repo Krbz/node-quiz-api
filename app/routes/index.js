@@ -6,7 +6,16 @@ const Validators = require('../validators/index');
 
 const Router = app.Router();
 
-Router.route('/').post((req, res) => res.json({
+/**
+ * @swagger
+ * /api/:
+ *   get:
+ *     description: Returns the Author data
+ *     responses:
+ *       200:
+ *         description: hello world
+ */
+Router.route('/').get((req, res) => res.json({
   url: 'https://github.com/Krbz/node-quiz-api',
   author: 'https://github.com/Krbz',
 }));
