@@ -95,6 +95,41 @@ Router.route('/auth/login').post(validate(Validators.Auth.Login), Controllers.Au
 Router.use(validate(Validators.Auth.verifyAuth), Controllers.Auth.Verify);
 
 /* Private routes */
+
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     tags:
+ *       - auth
+ *     description: User Login
+ *     consumes:
+ *       - 'application/json; charset=utf-8'
+ *     parameters:
+ *       - name: request
+ *         description: User's login request
+ *         in: body
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Your authentication is valid
+ *         schema:
+ *           type: object
+ *           properties:
+ *             login:
+ *               type: string
+ *               required: true
+ *             password:
+ *               type: string
+ *               required: true
+ *       500:
+ *         description: Failed while creating authenticate token. ${err}
+ *       403:
+ *         description: Authentication failed. ${resp.message}
+ */
+Router.route('/auth/logout').post(validate(Validators.Auth.Logout), Controllers.Auth.Logout);
+
 Router.route('/quiz').post(Controllers.Quiz.GetList);
 Router.route('/quiz/add').post(validate(Validators.Quiz.Add), Controllers.Quiz.AddQuiz);
 

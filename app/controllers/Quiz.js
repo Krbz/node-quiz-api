@@ -31,9 +31,6 @@ const Quiz = {
       })
       .catch(err => res.status(500).json({error: err.errors, Response: {message: err.message}}));
   },
-  GetQuestions: (req, res) => {
-
-  },
 };
 
 module.exports = Quiz;

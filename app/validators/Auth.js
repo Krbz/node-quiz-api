@@ -19,4 +19,10 @@ module.exports = {
       password: Joi.string().min(6).required(),
     },
   },
+  Logout: {
+    body: {
+      token: Joi.string().required(),
+      login: Joi.string().min(3).required(),
+    },
+  },
 };
